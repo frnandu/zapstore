@@ -82,7 +82,10 @@ class App extends BaseApp with DataModelMixin<App> {
       // Note: need to exclude zap.store because development versions always
       // carry a lower version code (e.g. 12) than published ones (e.g. 2012)
       comp = latestMetadata!.versionCode!.compareTo(installedVersionCode!);
-    } else {
+    }
+
+    // check also user-facing version to handle situation where versionCode is the same but version is different
+    if (comp==0) {
       comp = latestMetadata!.version!.compareTo(installedVersion!);
     }
 
